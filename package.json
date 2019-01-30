@@ -14,5 +14,18 @@
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
   },
-  "private": true
+  "private": true,
+  "name": "fruitstand-master",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fruitstand/FruitStand-Master.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fruitstand/FruitStand-Master/issues"
+  },
+  "homepage": "https://github.com/fruitstand/FruitStand-Master#readme",
+  "description": ""
 }
