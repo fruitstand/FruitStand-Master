@@ -7,74 +7,79 @@ FlatList input data
 
 const flatListData = [
     {
+        "key": "bleh",
+        "name": "null",               
+        "foodDescription": "This should not appear"
+    },
+    {
         "key": "598a678278fee204ee51cd2c",
-        "name": "Cream Tea",               
-        "foodDescription": "This is a cup of cream tea"
+        "name": "0.13 mi away",               
+        "foodDescription": "Ann’s Apples"
     },
     {
         "key": "598a684f78fee204ee51cd2f",
-        "name": "Fresh mushroom",        
-        "foodDescription": "Fresh mushroom with vegetables"
+        "name": "0.7 mi away",        
+        "foodDescription": "example_vendor1"
     },
     {
         "key": "598a687678fee204ee51cd30",
-        "name": "Japanese Oyster",
-        "foodDescription": "Oysters with ice rock"
+        "name": "1.2 mi away",
+        "foodDescription": "example_vendor2"
     },
     {
         "key": "598a680178fee204ee51cd2e",
-        "name": "Korean Kimchi",        
-        "foodDescription": "Traditional Korean Food"
+        "name": "3 mi away",        
+        "foodDescription": "example_vendor3"
     },
     {
         "key": "598a688878fee204ee51cd31",
-        "name": "Multiple salad",        
-        "foodDescription": "Salad mixed with mushroom"
+        "name": "5.9 mi away",        
+        "foodDescription": "example_vendor4"
     },
     {
         "key": "598a68b778fee204ee51cd32",
-        "name": "Vegetable",        
-        "foodDescription": "Fresh vegetables"
+        "name": "10 mi away",        
+        "foodDescription": "example_vendor5"
     },
     {
         "key": "598a67c478fee204ee51cd2d",
-        "name": "traditional japanese salad",        
-        "foodDescription": "Very delicious Japanese Salad"
+        "name": "15 mi away",        
+        "foodDescription": "example_vendor6"
     },
     {
         "key": "a1",
-        "name": "Cream Tea",               
-        "foodDescription": "This is a cup of cream tea"
+        "name": "17.5 mi away",               
+        "foodDescription": "example_vendor7"
     },
     {
         "key": "a2",
-        "name": "Fresh mushroom",        
-        "foodDescription": "Fresh mushroom with vegetables"
+        "name": "22.5 mi away",        
+        "foodDescription": "example_vendor8"
     },
     {
         "key": "a3",
-        "name": "Japanese Oyster",
-        "foodDescription": "Oysters with ice rock"
+        "name": "30 mi away",
+        "foodDescription": "example_vendor9"
     },
     {
         "key": "a4",
-        "name": "Korean Kimchi",        
-        "foodDescription": "Traditional Korean Food"
+        "name": "too far mi away",        
+        "foodDescription": "example_vendor10"
     },
     {
         "key": "a5",
-        "name": "Multiple salad",        
-        "foodDescription": "Salad mixed with mushroom"
+        "name": "just go to whole foods mi away",        
+        "foodDescription": "example_vendor11"
     },
     {
         "key": "a6",
-        "name": "Vegetable",        
-        "foodDescription": "Fresh vegetables"
+        "name": "no fruit is worth this mi away",        
+        "foodDescription": "example_vendor12"
     },
     {
         "key": "a7",
-        "name": "traditional japanese salad",        
-        "foodDescription": "Very delicious Japanese Salad"
+        "name": "don't say I didn't warn you mi away",        
+        "foodDescription": "Hell"
     }
 ];
 export default flatListData;
