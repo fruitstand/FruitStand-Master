@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableHighlight, Alert, FlatList, StyleSheet, Text, View } from 'react-native';
+import { TouchableHighlight, Alert, FlatList, StyleSheet, Text, View, Image } from 'react-native';
 import flatListData from '../data/flatListData';
 
 class FlatListItem extends Component {
@@ -21,11 +21,14 @@ class FlatListItem extends Component {
                             margin: 13,
                             marginTop: 7,
                             MarginBottom: -6,
-                            backgroundColor: 'black',
-                            borderRadius: 8,    }}> 
-                                    
-                            <Text style={styles.vendorCardDistance}>{this.props.item.name}</Text>
-                            <Text style={styles.vendorCardName}>{this.props.item.foodDescription}</Text>
+                            
+                            borderRadius: 8,
+                            alignItems: 'center',    }}> 
+                            
+                            <Image  style={{width: 200, height: 200}}
+                                    source={require('../assets/grape.png')} />
+
+                            <Text style={styles.SearchResults}>{this.props.item.foodDescription}</Text>
                             
                     </View>
                
@@ -91,6 +94,12 @@ const styles = StyleSheet.create({
     },
     vendorCardName: {
         color: '#57bdbd',
+        margin: 7,
+        fontSize: 24,
+        fontWeight: '600',
+    },
+    SearchResults: {
+        color: 'white',
         margin: 7,
         fontSize: 24,
         fontWeight: '600',

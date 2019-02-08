@@ -9,7 +9,7 @@ const flatListData = [
     {
         "key": "bleh",
         "name": "null",               
-        "foodDescription": "This should not appear"
+        "foodDescription": "13 matches found"
     },
     {
         "key": "598a678278fee204ee51cd2c",
