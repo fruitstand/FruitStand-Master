@@ -1,10 +1,39 @@
 import React, { Component } from 'react';
-import { TouchableHighlight, Alert, FlatList, StyleSheet, Text, View, Image } from 'react-native';
+import { TouchableHighlight, Alert, FlatList, StyleSheet, Text, View, Image, Linking } from 'react-native';
 import flatListData from '../data/flatListData';
 
+
 class FlatListItem extends Component {
+
+    
     _onPressButton() {
-        Alert.alert("Slow down a little why don't you. Long press the button")
+        Alert.alert(
+            'Get your Fruit',
+            'This will open the route in Google Maps',
+            [
+            {text: 'Open in Google Maps',
+                    onPress: () => {
+                        let { address, postalCode, city } = {address: "7801 Titan Dr",
+                                                            postalCode: 95843,
+                                                            city: "Antelope"}
+                        let { myaddress, mypostalCode, mycity } = {
+                            myaddress: "4400 Shandwick Dr",
+                            mypostalCode: 95843,
+                            mycity: "Antelope"
+                        };
+                    
+                        let saddr = encodeURIComponent(`${myaddress} ${mypostalCode}, ${mycity}`);
+                        let daddr = encodeURIComponent(`${address} ${postalCode}, ${city}`);
+                    
+                        Linking.openURL(`http://maps.google.com/?saddr=${saddr}&daddr=${daddr}`);
+                    }
+                    },
+            {text: 'Cancel',
+                //No onPress because the cancel button should not do anything
+                style: 'cancel',
+            },
+            ],
+            {cancelable: false}, )
       }
     
       _onLongPressButton() {
@@ -13,11 +42,9 @@ class FlatListItem extends Component {
     render() {  
         
         if (this.props.index == 0) {
-            return (
-                
-
+            return ( 
                     <View style={{
-                            flex: 50,
+                            flex: 1,
                             margin: 13,
                             marginTop: 7,
                             MarginBottom: -6,
@@ -28,12 +55,9 @@ class FlatListItem extends Component {
                             <Image  style={{width: 200, height: 200}}
                                     source={require('../assets/grape.png')} />
 
-                            <Text style={styles.SearchResults}>{this.props.item.foodDescription}</Text>
-                            
-                    </View>
-               
+                            <Text style={styles.SearchResults}>{this.props.item.foodDescription}</Text> 
+                    </View> 
             );
-
         }
 
         else {
@@ -60,16 +84,17 @@ class FlatListItem extends Component {
     }
 }
 
+
+
 export default class BasicFlatList extends Component {
     render() {
       return (
-        <View style={{flex: 1, marginTop: 22, backgroundColor: '#F7555d'}}>
+        <View style = {{flex: 1, marginTop: 22, backgroundColor: '#F7555d'}}>
             
             
             <FlatList 
                 data={flatListData}
                 renderItem={({item, index})=>{
-                    //console.log(`Item = ${JSON.stringify(item)}, index = ${index}`);
                     return (
                     <FlatListItem item={item} index={index}>
 
