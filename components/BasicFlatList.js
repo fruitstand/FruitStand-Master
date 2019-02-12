@@ -5,7 +5,6 @@ import flatListData from '../data/flatListData';
 
 class FlatListItem extends Component {
 
-    
     _onPressButton() {
         Alert.alert(
             'Get your Fruit',
