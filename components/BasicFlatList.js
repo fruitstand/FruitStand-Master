@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { TouchableHighlight, Alert, FlatList, StyleSheet, Text, View, Image, Linking } from 'react-native';
 import flatListData from '../data/flatListData';
 
-
+//Testing Git things
 class FlatListItem extends Component {
 
     _onPressButton() {
