@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 import ChloesScreen from "./Screens/Screen1.js"
 import JaredsScreen from "./Screens/Screen2.js"
-import GeosScreen from "./Screens/Screen3.js"
+import SearchResultsScreen from "./Screens/SearchResultsScreen.js"
 
 export default createMaterialBottomTabNavigator({
   Chloes: { 
@@ -14,7 +14,7 @@ export default createMaterialBottomTabNavigator({
                          tabBarIcon:({tintColor}) => (
                          <Icon name="logo-facebook" color={tintColor} size={24} /> )}},
   Jareds: { screen: JaredsScreen },
-  Geos: { screen: GeosScreen }
+  SearchResults: { screen: SearchResultsScreen }
 }, {
   activeTintColor: 'red'
 })
