@@ -3,13 +3,13 @@ import {View, Text, StyleSheet} from "react-native";
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-import ChloesScreen from "./Screens/Screen1.js"
+import animations from "./Screens/Screen1.js"
 import JaredsScreen from "./Screens/Screen2.js"
 import SearchResultsScreen from "./Screens/SearchResultsScreen.js"
 
 export default createMaterialBottomTabNavigator({
   Chloes: { 
-    screen: ChloesScreen, 
+    screen: animations, 
     navigationOptions: { tabBarLabel: 'Home',
                          tabBarIcon:({tintColor}) => (
                          <Icon name="logo-facebook" color={tintColor} size={24} /> )}},

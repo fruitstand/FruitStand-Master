@@ -1,20 +1,68 @@
-import React, { Component } from "react";
-import {View, Text, StyleSheet} from "react-native"
+import React, { Component } from 'react';
+import { 
+  StyleSheet, 
+  View, 
+  Animated,
+  Text,
+  Image,  
+  Easing,
+  AppRegistry } from 'react-native';
 
-export default class ChloesScreen extends Component {
-  render() {
+const arr = []
+for (var i = 0; i < 500; i++) {
+  arr.push(i)
+}
+
+export default class animations extends Component {
+
+  constructor () {
+    super()
+    this.animatedValue = []
+    arr.forEach((value) => {
+      this.animatedValue[value] = new Animated.Value(0)
+    })
+  }
+
+  componentDidMount () {
+    this.animate()
+  }
+
+  animate () {
+    const animations = arr.map((item) => {
+      return Animated.timing(
+        this.animatedValue[item],
+        {
+          toValue: 1,
+          duration: 4000
+        }
+      )
+    })
+    Animated.stagger(10, animations).start()
+  }
+
+  render () {
+    const animations = arr.map((a, i) => {
+      return <Animated.View key={i} style={{opacity: this.animatedValue[a], height: 20, width: 20, backgroundColor: 'blue', marginLeft: 4, marginTop: 3}} />
+    })
     return (
       <View style={styles.container}>
-      <Text>Chloes Screen! This is cooler than buttons. </Text>
+        <Text style = {styles.fruitText}>Fruit Stand</Text>
+        {animations}
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  fruitText: {
+    fontSize: 100,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'orange',
+  },
 });
