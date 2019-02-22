@@ -4,7 +4,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import animations from "./Screens/Screen1.js"
-import JaredsScreen from "./Screens/Screen2.js"
+import ToggleScreen from "./ToggleStuff/ToggleScreen.js"
 import SearchResultsScreen from "./Screens/SearchResultsScreen.js"
 
 export default createMaterialBottomTabNavigator({
@@ -13,7 +13,7 @@ export default createMaterialBottomTabNavigator({
     navigationOptions: { tabBarLabel: 'Home',
                          tabBarIcon:({tintColor}) => (
                          <Icon name="logo-facebook" color={tintColor} size={24} /> )}},
-  Jareds: { screen: JaredsScreen },
+  Jareds: { screen: ToggleScreen },
   SearchResults: { screen: SearchResultsScreen }
 }, {
   activeTintColor: 'red'
