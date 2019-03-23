@@ -14,10 +14,8 @@ export default class Toggle extends React.Component {
     
         super(props);
 
-        this.state = {
-            state_ID__fruitToggle: false,
-        }
-    }
+	}
+	
 
     render() {
         
@@ -40,10 +38,10 @@ export default class Toggle extends React.Component {
                                 <View style={styles.inneritem1}>
                                     <View style={styles.item2}>
 											<Switch 
-												value={this.state.state_ID__fruitToggle}
-												onValueChange={(val) => {
-													this.setState({ state_ID__fruitToggle : val });
-													console.log(this.props.fruit, 'toggle works');
+												value={this.props.On}
+												onValueChange={() => {
+													
+													this.props.changeToggle(this.props.fruit,this.props.On);
 												}
 											}
 

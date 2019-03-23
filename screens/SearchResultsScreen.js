@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableHighlight, Alert, FlatList, StyleSheet, Text, View, Image, Linking } from 'react-native';
-import flatListData from '../data/flatListData';
+
 
 //The component for the top of the screen before the VendorCards
 class ScreenHeader extends Component{
@@ -8,7 +8,7 @@ class ScreenHeader extends Component{
       return (
         <View style={styles.screenHeader}> 
             <Image style={styles.grapeLogo} source={require('../assets/grape.png')} />
-            <Text style={styles.searchResults}>{this.props.item.searchResults}</Text> 
+            <Text style={styles.searchResults}>{this.props.searchCount}</Text> 
         </View>
       );
     }
@@ -26,11 +26,12 @@ class VendorCard extends Component{
 
     //Opens Google Maps when asked
     _OpenMaps() {
-        let userCoordinates = flatListData[0]['userCoordinates'];
-        let { address, postalCode, city } = this.props.item.vendorAddress
+        
+        let {ULat, ULong} = this.props.miscData.userCoordinates;
+        let { Lat, Long } = this.props.item.vendorAddress
     
-        let saddr = encodeURIComponent(`${userCoordinates}`);
-        let daddr = encodeURIComponent(`${address} ${postalCode}, ${city}`);
+        let saddr = encodeURIComponent(`${ULat} ${ULong}`);
+        let daddr = encodeURIComponent(`${Lat} ${Long}`);
     
         Linking.openURL(`http://maps.google.com/?saddr=${saddr}&daddr=${daddr}`);
     }
@@ -69,13 +70,16 @@ class FlatListItem extends Component {
         //This is how we get the first item rendered differently from the rest of the vendorCards
         if (this.props.index == 0) {
             return ( 
-                <ScreenHeader item={this.props.item} index={this.props.index} />
+                <View>
+                    <ScreenHeader searchCount = {this.props.miscData.searchCount}/> 
+                    <VendorCard item={this.props.item} index={this.props.index} miscData = {this.props.miscData} /> 
+                </ View >
             );
         }
         else {
             //These are the vendor cards which are mainly just styling code 
             return (
-                <VendorCard item={this.props.item} index={this.props.index} />           
+                <VendorCard item={this.props.item} index={this.props.index} miscData = {this.props.miscData}/>           
             );
         }
     }
@@ -85,16 +89,20 @@ class FlatListItem extends Component {
 //The top portion is simply rendered differently from the rest
 export default class SearchResultsScreen extends Component {
     render() {
+        const {params} = this.props.navigation.state
+        console.log(params)
+
       return (
         <View style = {styles.screen}>
             <FlatList 
-                data={flatListData}
+                data={this.props.navigation.state.params.vendors}
                 renderItem={({item, index})=> {
                     return (
-                    <FlatListItem item={item} index={index}>                    
-                    </FlatListItem>
+                    <FlatListItem item={item} index={index} miscData = {this.props.navigation.state.params.SearchResults}/>                    
                     );
-                }}>
+                }}
+                keyExtractor = {item => item.vendorName}
+                >
             </FlatList>
         </View>
       );

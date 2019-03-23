@@ -12,13 +12,7 @@ import {
 
 export default class Searchbutton extends React.Component {
 
-
-    render() {
-
-        if (!this.props.visible) {
-            return false;
-        }
-        
+    render() { 
 
         return (
 
@@ -27,8 +21,8 @@ export default class Searchbutton extends React.Component {
                                 <TouchableOpacity 
 										style={styles.item1}
 										onPress={() => {
-											//this.props.navigation.navigate('SearchResultsScreen', {})
-											console.log('button works')}
+											this.props.getUserLocation(this.props.sendData);
+											}
 										}
 									>
 										

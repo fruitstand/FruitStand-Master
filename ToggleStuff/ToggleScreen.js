@@ -6,6 +6,7 @@ import {
     StyleSheet,
     View,
     ScrollView,
+    Text
 } from 'react-native';
 
 import Searchbutton from './Searchbutton';
@@ -18,31 +19,106 @@ export default class ToggleScreen extends React.Component {
         super(props);
 
         this.state = {
-            SearchbuttonVisible: true,
-            ToggleVisible: true,
+            Apples: false,
+            Oranges: false,
+            Grapes: false
         }
+        this.changeToggle = this.changeToggle.bind(this);
+        this.getUserLocation = this.getUserLocation.bind(this);
+        this.sendData = this.sendData.bind(this);
 
     }
+
+    getUserLocation(callback) {
+        navigator.geolocation.getCurrentPosition(position => {
+          this.userlat = parseFloat(position.coords.latitude)
+          this.userlong = parseFloat(position.coords.longitude)
+            
+          //this callback is necesary to ensure that the user date
+          //is not sent before we can retrieve their location
+          callback();
+          
+
+          //I believe the line of code below catches errors
+        }, er => console.log (err));
+      }
+
+    sendData() {
+        //Make sure IP is correct
+        return fetch('http://32910b66.ngrok.io/summary', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userlat: this.userlat,
+            userlong: this.userlong,
+            fruits: this.state,
+            }
+          ),
+        })
+          
+        .then( (response) => response.json() )
+        .then( (responseJson) => {
+            
+              this.props.navigation.navigate('SearchResults', responseJson)
+              return responseJson;
+          })
+    
+          .catch((error) => {
+            console.error(error);
+          }); 
+          
+      }
+
+    changeToggle(fruit,value) {
+        
+        if (value == false) { 
+            this.setState({
+            [fruit]: true
+            }) }
+        else if (value == true) {
+            this.setState({
+            [fruit]: false
+            }) };
+      }
+      
+      
     render() {
         return (
             
             <View style={styles.container}>
+                
 
                 <ScrollView style={styles.screencontainer}>
 
                     <View style={styles.screencontainerInner}>
+                        
 
                         <Searchbutton 
                             toggleComponent={ (component) => this.toggleComponent(component) }
-                            visible={ this.state.SearchbuttonVisible }
+                            getUserLocation = {this.getUserLocation}
+                            sendData = {this.sendData}
+                            navigation={this.props.navigation}
                         />
                         <Toggle 
                             toggleComponent={ (component) => this.toggleComponent(component) }
-                            fruit = 'Apple'
+                            fruit = 'Apples'
+                            On = {this.state.Apples}
+                            changeToggle = {this.changeToggle}
                         />
                         <Toggle 
                             toggleComponent={ (component) => this.toggleComponent(component) }
-                            fruit = 'Orange'
+                            fruit = 'Oranges'
+                            On = {this.state.Oranges}
+                            changeToggle = {this.changeToggle}
+                        />
+                        <Toggle 
+                            toggleComponent={ (component) => this.toggleComponent(component) }
+                            fruit = 'Grapes'
+                            On = {this.state.Grapes}
+                            changeToggle = {this.changeToggle}
                         />
                         {/*if you want to make a new toggle, do it here
                         STEP 1.  Copy this:
@@ -84,4 +160,3 @@ const styles = StyleSheet.create({
 	},
 	
 });
-
