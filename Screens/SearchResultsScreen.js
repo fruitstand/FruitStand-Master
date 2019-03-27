@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { TouchableHighlight, Alert, FlatList, StyleSheet, Text, View, Image, Linking } from 'react-native';
-import flatListData from '../data/flatListData';
 
-//Component for the top of the screen before the VendorCards
+
+//The component for the top of the screen before the VendorCards
 class ScreenHeader extends Component{
     render() {
       return (
         <View style={styles.screenHeader}> 
             <Image style={styles.grapeLogo} source={require('../assets/grape.png')} />
-            <Text style={styles.searchResults}>{this.props.item.searchResults}</Text> 
+            <Text style={styles.searchResults}>{this.props.searchCount}</Text> 
         </View>
       );
     }
   }
 
-//VendorCard Component
+//The actual VendorCard Component
 class VendorCard extends Component{
 
     constructor(props) {
@@ -26,36 +26,35 @@ class VendorCard extends Component{
 
     //Opens Google Maps when asked
     _OpenMaps() {
-        let userCoordinates = flatListData[0]['userCoordinates'];
-        let { address, postalCode, city } = this.props.item.vendorAddress
+        
+        let {ULat, ULong} = this.props.miscData.userCoordinates;
+        let { Lat, Long } = this.props.item.vendorAddress
     
-        let saddr = encodeURIComponent(`${userCoordinates}`);
-        let daddr = encodeURIComponent(`${address} ${postalCode}, ${city}`);
+        let saddr = encodeURIComponent(`${ULat} ${ULong}`);
+        let daddr = encodeURIComponent(`${Lat} ${Long}`);
     
         Linking.openURL(`http://maps.google.com/?saddr=${saddr}&daddr=${daddr}`);
     }
     
-      //Result of pressing a VendorCard
+      //The result of pressing a vendorCard
     _onPressButton() {
         Alert.alert(
-            
-            'Got Fruit.',
-            'Open location in Google Maps?',
-            [  //Details the text and functions of the alert
-            {text: 'Take me there!',
+            'Get your Fruit',
+            'This will open the route in Google Maps',
+            [  //The code below details the text and functions of the alert
+            {text: 'Open in Google Maps',
                     onPress: this._OpenMaps },
             {text: 'Cancel',
                 //No onPress because the cancel button should not do anything
                 style: 'cancel', },
             ],
-            
             {cancelable: false}, )
       }
     
     render() {
       return (
         <TouchableHighlight onPress={this._onPressButton} onLongPress={this._onPressButton} 
-        underlayColor='#F78764'>
+        underlayColor="white">
                     <View style={styles.vendorCard}> 
                             <Text style={styles.vendorCardDistance}>{this.props.item.distance}</Text>
                             <Text style={styles.vendorCardName}>{this.props.item.vendorName}</Text>
@@ -65,37 +64,45 @@ class VendorCard extends Component{
     }
   }
 
+
 class FlatListItem extends Component {
     render() {  
-        //How we get the first item rendered differently from the rest of the vendorCards
+        //This is how we get the first item rendered differently from the rest of the vendorCards
         if (this.props.index == 0) {
             return ( 
-                <ScreenHeader item={this.props.item} index={this.props.index} />
+                <View>
+                    <ScreenHeader searchCount = {this.props.miscData.searchCount}/> 
+                    <VendorCard item={this.props.item} index={this.props.index} miscData = {this.props.miscData} /> 
+                </ View >
             );
         }
         else {
-            //Vendor cards which are mainly just styling code 
+            //These are the vendor cards which are mainly just styling code 
             return (
-                <VendorCard item={this.props.item} index={this.props.index} />           
+                <VendorCard item={this.props.item} index={this.props.index} miscData = {this.props.miscData}/>           
             );
         }
     }
 }
 
-//Made up fron flatlistData
-//The top portion is rendered differently from the rest
+//The entire screen is made up of a FlatList
+//The top portion is simply rendered differently from the rest
 export default class SearchResultsScreen extends Component {
     render() {
+        const {params} = this.props.navigation.state
+        console.log(params)
+
       return (
         <View style = {styles.screen}>
             <FlatList 
-                data={flatListData}
+                data={this.props.navigation.state.params.vendors}
                 renderItem={({item, index})=> {
                     return (
-                    <FlatListItem item={item} index={index}>                    
-                    </FlatListItem>
+                    <FlatListItem item={item} index={index} miscData = {this.props.navigation.state.params.SearchResults}/>                    
                     );
-                }}>
+                }}
+                keyExtractor = {item => item.vendorName}
+                >
             </FlatList>
         </View>
       );
