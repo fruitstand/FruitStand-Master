@@ -8,14 +8,14 @@ export default class App extends Component {
       <View style={styles.container}>
         <Image
           style={{width: 300, height: 200}}
-          source={{uri: 'https://media.giphy.com/media/nL8qXEBkRu7iV9TmjL/giphy.gif'}} />
+          source={{uri: 'https://media.giphy.com/media/nL8qXEBkRu7iV9TmjL/giphy.gif'}} /> 
       </View>
     );
   }
 }
 
 /*
-Other animation choices:
+Other animation choices, possible change to upload instead of website link:
 
 https://media.giphy.com/media/3bztARr7COx2wsoXhT/giphy.gif
 
