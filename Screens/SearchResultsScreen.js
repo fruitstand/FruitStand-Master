@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     screenHeader: {
         flex: 1,
         margin: 13,
-        marginTop: 7,
+        marginTop: 0,
         borderRadius: 8,
         alignItems: 'center', 
     },

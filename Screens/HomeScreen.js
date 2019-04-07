@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, Text} from 'react-native';
-import { Constants } from 'expo';
+import { Constants, Video} from 'expo';
 
 export default class App extends Component {
   static navigationOptions = {
@@ -10,9 +10,16 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image
-          style={{width: 300, height: 200}}
-          source={{uri: 'https://media.giphy.com/media/nL8qXEBkRu7iV9TmjL/giphy.gif'}} /> 
+        <Video
+          source={require('../assets/WelcomeGif.mp4')}
+          rate={1.0}
+          volume={1.0}
+          isMuted={false}
+          resizeMode="cover"
+          shouldPlay
+          isLooping
+          style={{ width: 300, height: 300 }}
+        />
 
         <TouchableOpacity
               style={styles.button}
