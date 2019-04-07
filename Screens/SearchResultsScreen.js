@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
     },
     vendorCardName: {
-        color: '#65BCBF',
+        color: '#53b4b8',
         margin: 7,
         fontSize: 24,
         fontWeight: '600',

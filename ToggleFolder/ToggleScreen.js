@@ -6,7 +6,6 @@ import Searchbutton from './Searchbutton';
 import Toggle from './Toggle';
 
 export default class ToggleScreen extends React.Component {
-
     constructor(props) {
 
         super(props);
@@ -20,7 +19,21 @@ export default class ToggleScreen extends React.Component {
         this.changeToggle = this.changeToggle.bind(this);
         this.getUserLocation = this.getUserLocation.bind(this);
         this.sendData = this.sendData.bind(this);
+        this.startSearch = this.startSearch.bind(this);
         
+    }
+
+    startSearch() {
+        data = {'SearchResults': {'searchCount': '5 matches found', 'userCoordinates': {'ULat': 38.7119922781989, 'ULong': -121.35742949965585}}, 'vendors': [{'distance': '0.28 mi away', 'vendorName': "Ann's Apples", 'vendorAddress': {'Lat': 38.710925, 'Long': -121.352341}}, {'distance': '0.88 mi away', 'vendorName': "Peter's Pear", 'vendorAddress': {'Lat': 38.723348, 'Long': -121.364647}}, {'distance': '0.9 mi away', 'vendorName': 'Last Vendor Around', 'vendorAddress': {'Lat': 38.705224, 'Long': -121.343284}}, {'distance': '0.92 mi away', 'vendorName': 'Mexican Imported', 'vendorAddress': {'Lat': 38.700321, 'Long': -121.365493}}, {'distance': '1.61 mi away', 'vendorName': 'MynameisPedro', 'vendorAddress': {'Lat': 38.71722, 'Long': -121.3865493}}]}
+        this.props.navigation.navigate('SearchResults', data)
+     }
+
+    static navigationOptions = {
+        headerRight: (<Button
+                        title="Save"
+                        onPress={() => {
+                            this.startSearch;
+                        } }/>)
     }
 
     getUserLocation(callback) {
