@@ -18,7 +18,7 @@ export default class Toggle extends React.Component {
 							{this.props.fruit}
 						</Text>
 					
-						<View style={styles.inneritem1}>
+						<View style={styles.theToggle}>
 							<Switch 
 								value={this.props.On}
 								onValueChange={() => {
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	
-	inneritem1: {
+	theToggle: {
 	    position: 'absolute',
 	    zIndex: 1,
 	},

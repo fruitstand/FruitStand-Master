@@ -88,6 +88,10 @@ class FlatListItem extends Component {
 //The entire screen is made up of a FlatList
 //The top portion is simply rendered differently from the rest
 export default class SearchResultsScreen extends Component {
+    static navigationOptions = {
+        header: null
+      }
+
     render() {
         const {params} = this.props.navigation.state
         console.log(params)
