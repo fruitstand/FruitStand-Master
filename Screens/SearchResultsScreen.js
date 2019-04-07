@@ -117,13 +117,14 @@ export default class SearchResultsScreen extends Component {
 const styles = StyleSheet.create({
     screen: {
         flex: 1, 
-        marginTop: 22, 
-        backgroundColor: '#F78764'
+        marginTop: 0,
+        paddingTop: 22, 
+        backgroundColor: '#F8777D'
     },
     screenHeader: {
         flex: 1,
         margin: 13,
-        marginTop: 0,
+        marginTop: 7,
         borderRadius: 8,
         alignItems: 'center', 
     },
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
     },
     vendorCardName: {
-        color: '#177E89',
+        color: '#65BCBF',
         margin: 7,
         fontSize: 24,
         fontWeight: '600',
