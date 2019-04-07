@@ -21,10 +21,12 @@ export default class Toggle extends React.Component {
 						<View style={styles.theToggle}>
 							<Switch 
 								value={this.props.On}
+								trackColor={{true: '', false: '#F8777D'}}
+								ios_backgroundColor={"#F8777D"}
 								onValueChange={() => {
-									
 									this.props.changeToggle(this.props.fruit,this.props.On);
-								} }/>		
+								} }
+								/>		
 						</View>
           	</View>
                 	            
@@ -37,27 +39,30 @@ export default class Toggle extends React.Component {
 const styles = StyleSheet.create({
 	toggleRow: {
 		//Toggle changes
+		flex:1,
 		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'center',
+		justifyContent: 'space-between',
 		overflow: 'hidden',
-		width: '100%',
-	    height: 35 
+		padding: 5 ,
+		borderBottomColor: '#d3d3d3',
+   		borderBottomWidth: .5,
 	},
 	
 	
 	toggleText: {
-		paddingLeft: 15,
+		flex:1,
+		paddingLeft: 7.5,
 	    color: '#181818',
 	    fontSize: 15,
-	    textAlign: 'left',
-		width: '100%',
-		alignItems: 'center',
+	    
 	},
 	
 	theToggle: {
-	    position: 'absolute',
-	    zIndex: 1,
+		paddingRight: 5,
+		flex:1,
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
 	},
 	
 });

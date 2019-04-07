@@ -3,32 +3,25 @@ import { StyleSheet, View, Text, TouchableOpacity,}
 from 'react-native';
 
 export default class Searchbutton extends React.Component {
-
-    render() {
-
-        
+	
+    render() {   
         return (
 			
             <View style={styles.component}>
-							
                                 <TouchableOpacity 
 										style={styles.item1}
 										onPress={() => {this.props.getUserLocation(this.props.sendData);}
-										}
-									>
+									}>
+
+									<Text style={styles.item1TouchableOpacity}>
+										Get fruit? 
+									</Text>
 										
-										<Text style={styles.item1TouchableOpacity}>
-											Get fruit? 
-										</Text>
-										
-									</TouchableOpacity>
+								</TouchableOpacity>
 									
-                			</View>
-                	            
+                			</View>           
         );
-
     }
-
 }
 
 const styles = StyleSheet.create({
