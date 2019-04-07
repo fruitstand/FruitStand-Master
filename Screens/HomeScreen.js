@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import { Constants } from 'expo';
 
 export default class App extends Component {
+  static navigationOptions = {
+    header: null
+  }
+  
   render() {
     return (
       <View style={styles.container}>
         <Image
           style={{width: 300, height: 200}}
           source={{uri: 'https://media.giphy.com/media/nL8qXEBkRu7iV9TmjL/giphy.gif'}} /> 
+
+        <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                this.props.navigation.navigate('Toggle');
+                } }>
+                <Text> Touch Here </Text>
+        </TouchableOpacity>
+
+
       </View>
     );
   }
@@ -39,5 +53,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
     backgroundColor: 'white',
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10
   },
 });
