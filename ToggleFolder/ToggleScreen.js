@@ -12,7 +12,7 @@ export default class ToggleScreen extends React.Component {
           },
         headerRight: (
             <Button 
-                title='Save' 
+                title='Search' 
                 onPress={ () => { 
                     data = {'SearchResults': {'searchCount': '5 matches found', 'userCoordinates': {'ULat': 38.7119922781989, 'ULong': -121.35742949965585}}, 'vendors': [{'distance': '0.28 mi away', 'vendorName': "Ann's Apples", 'vendorAddress': {'Lat': 38.710925, 'Long': -121.352341}}, {'distance': '0.88 mi away', 'vendorName': "Peter's Pear", 'vendorAddress': {'Lat': 38.723348, 'Long': -121.364647}}, {'distance': '0.9 mi away', 'vendorName': 'Last Vendor Around', 'vendorAddress': {'Lat': 38.705224, 'Long': -121.343284}}, {'distance': '0.92 mi away', 'vendorName': 'Mexican Imported', 'vendorAddress': {'Lat': 38.700321, 'Long': -121.365493}}, {'distance': '1.61 mi away', 'vendorName': 'MynameisPedro', 'vendorAddress': {'Lat': 38.71722, 'Long': -121.3865493}}]}
                     navigation.navigate('SearchResults',data);
@@ -27,7 +27,8 @@ export default class ToggleScreen extends React.Component {
         this.state = {
             Apples: false,
             Oranges: false,
-            Grapes: false
+            Grapes: false,
+            Bananas: false
         }
 
         this.changeToggle = this.changeToggle.bind(this);
@@ -116,6 +117,12 @@ export default class ToggleScreen extends React.Component {
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Grapes'
                         On = {this.state.Grapes}
+                        changeToggle = {this.changeToggle}
+                    />
+                    <Toggle 
+                        toggleComponent={ (component) => this.toggleComponent(component) }
+                        fruit = 'Bananas'
+                        On = {this.state.Bananas}
                         changeToggle = {this.changeToggle}
                     />
                     
