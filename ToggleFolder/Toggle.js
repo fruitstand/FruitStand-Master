@@ -53,8 +53,9 @@ const styles = StyleSheet.create({
 	toggleText: {
 		flex:1,
 		paddingLeft: 7.5,
-	    color: '#181818',
-	    fontSize: 15,
+	    color: '#666666',
+		fontSize: 15,
+		fontWeight: "400"
 	    
 	},
 	
