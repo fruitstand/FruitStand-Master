@@ -25,10 +25,40 @@ export default class ToggleScreen extends React.Component {
         super(props);
 
         this.state = {
+            Strawberries: false,
             Apples: false,
-            Oranges: false,
+            Dragonfruits: false,
+            Passionfruits: false,
+            Cranberries: false,
+            Watermelons: false,
             Grapes: false,
-            Bananas: false
+            Oranges: false,
+            Bananas: false,
+            Peaches: false,
+            Mangos: false,
+            Pineapples: false,
+            Cherries: false,
+            Blueberries: false,
+            Raspberries: false,
+            Pears: false,
+            Blackberries: false,
+            Plums: false,
+            Kiwis: false,
+            Lemons: false,
+            Tangerines: false,
+            Pomergranates: false,
+            Apricots: false,
+            Nectarines: false,
+            Avocados: false,
+            Cantaloupes: false,
+            Coconuts: false,
+            Grapefruits: false,
+            Limes: false,
+            Lychees: false,
+            Figs: false,
+            Dates: false,
+            Papayas: false,
+
         }
 
         this.changeToggle = this.changeToggle.bind(this);
@@ -129,12 +159,6 @@ export default class ToggleScreen extends React.Component {
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Cranberries'
                         On = {this.state.Cranberries}
-                        changeToggle = {this.changeToggle}
-                    />
-                    <Toggle 
-                        toggleComponent={ (component) => this.toggleComponent(component) }
-                        fruit = 'Strawberries'
-                        On = {this.state.Strawberries}
                         changeToggle = {this.changeToggle}
                     />
                     <Toggle 
