@@ -54,7 +54,7 @@ class VendorCard extends Component{
     render() {
       return (
         <TouchableHighlight onPress={this._onPressButton} onLongPress={this._onPressButton} 
-        underlayColor="white">
+        underlayColor="#F8777D">
                     <View style={styles.vendorCard}> 
                             <Text style={styles.vendorCardDistance}>{this.props.item.distance}</Text>
                             <Text style={styles.vendorCardName}>{this.props.item.vendorName}</Text>

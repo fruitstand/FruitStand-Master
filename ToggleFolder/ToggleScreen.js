@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Button} 
+import { StyleSheet, View, ScrollView, Button, Alert} 
 from 'react-native';
 
 import Searchbutton from './Searchbutton';
@@ -14,10 +14,23 @@ export default class ToggleScreen extends React.Component {
             <Button 
                 title='Search' 
                 onPress={ () => { 
-                    data = {'SearchResults': {'searchCount': '5 matches found', 'userCoordinates': {'ULat': 38.7119922781989, 'ULong': -121.35742949965585}}, 'vendors': [{'distance': '0.28 mi away', 'vendorName': "Ann's Apples", 'vendorAddress': {'Lat': 38.710925, 'Long': -121.352341}}, {'distance': '0.88 mi away', 'vendorName': "Peter's Pear", 'vendorAddress': {'Lat': 38.723348, 'Long': -121.364647}}, {'distance': '0.9 mi away', 'vendorName': 'Last Vendor Around', 'vendorAddress': {'Lat': 38.705224, 'Long': -121.343284}}, {'distance': '0.92 mi away', 'vendorName': 'Mexican Imported', 'vendorAddress': {'Lat': 38.700321, 'Long': -121.365493}}, {'distance': '1.61 mi away', 'vendorName': 'MynameisPedro', 'vendorAddress': {'Lat': 38.71722, 'Long': -121.3865493}}]}
-                    navigation.navigate('SearchResults',data);
-                 } }              
+                    const { params = {} } = navigation.state;
+                    
+                    if (params.Apples == false && 
+                        params.Oranges == false &&
+                        params.Grapes == false &&
+                        params.Bananas == false ) {
+                        Alert.alert("No Fruit Selected",
+                                    "Please make a selection to locate availabe vendors")
+                    } else {
+                        navigation.getParam('query')(); 
+                    }
+
+                
+                }
+                  }              
             />
+            
         )});
     
     constructor(props) {
@@ -34,6 +47,7 @@ export default class ToggleScreen extends React.Component {
         this.changeToggle = this.changeToggle.bind(this);
         this.getUserLocation = this.getUserLocation.bind(this);
         this.sendData = this.sendData.bind(this);
+        this.query = this.query.bind(this);
     }
 
     getUserLocation(callback) {
@@ -51,8 +65,9 @@ export default class ToggleScreen extends React.Component {
       }
 
     sendData() {
+        console.log("Test")
         //Make sure IP is correct
-        return fetch('http://3cf18ad1.ngrok.io/summary', {
+        return fetch('http://283b9070.ngrok.io/summary', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -78,27 +93,55 @@ export default class ToggleScreen extends React.Component {
           }); 
           
       }
+      
+    query() {
+        this.getUserLocation(this.sendData);
+    }
 
     changeToggle(fruit,value) {
         
         if (value == false) { 
             this.setState({
             [fruit]: true
-            }) }
+            }) 
+        
+            this.props.navigation.setParams({
+                [fruit]: true
+              });
+        }
         else if (value == true) {
             this.setState({
             [fruit]: false
-            }) };
+            }) 
+            
+            this.props.navigation.setParams({
+                [fruit]: false
+              });
+            ;}
       }
       
+    componentDidMount() {
+        const { navigation } = this.props
+        navigation.setParams({
+            getUserLocation: this.getUserLocation,
+            sendData: this.sendData,
+            query: this.query,
+            Apples: this.state.Apples,
+            Oranges: this.state.Oranges,
+            Bananas: this.state.Bananas,
+            Grapes: this.state.Grapes,
+
+        })
+
+
+    }
+
     render() {
         return (
             
             <View style={styles.container}>
 
                 <ScrollView style={styles.screencontainer}>
-
-                    
 
                     
                     <Toggle 
@@ -141,12 +184,7 @@ export default class ToggleScreen extends React.Component {
                     */}
                     {/*To be eventually deleted*/}
                     
-                    <Searchbutton 
-                            toggleComponent={ (component) => this.toggleComponent(component) }
-                            getUserLocation = {this.getUserLocation}
-                            sendData = {this.sendData}
-                            navigation={this.props.navigation}
-                    />
+                    
                     
 
                 </ScrollView>

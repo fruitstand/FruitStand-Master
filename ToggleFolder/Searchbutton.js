@@ -17,7 +17,7 @@ export default class Searchbutton extends React.Component {
 							Get fruit? 
 						</Text>
 							
-					</TouchableOpacity>				
+					</TouchableOpacity>				  
             </View>           
         );
     }
