@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Button} 
+import { StyleSheet, View, ScrollView, Button, Alert} 
 from 'react-native';
 
 import Searchbutton from './Searchbutton';
@@ -14,10 +14,52 @@ export default class ToggleScreen extends React.Component {
             <Button 
                 title='Search' 
                 onPress={ () => { 
-                    data = {'SearchResults': {'searchCount': '5 matches found', 'userCoordinates': {'ULat': 38.7119922781989, 'ULong': -121.35742949965585}}, 'vendors': [{'distance': '0.28 mi away', 'vendorName': "Ann's Apples", 'vendorAddress': {'Lat': 38.710925, 'Long': -121.352341}}, {'distance': '0.88 mi away', 'vendorName': "Peter's Pear", 'vendorAddress': {'Lat': 38.723348, 'Long': -121.364647}}, {'distance': '0.9 mi away', 'vendorName': 'Last Vendor Around', 'vendorAddress': {'Lat': 38.705224, 'Long': -121.343284}}, {'distance': '0.92 mi away', 'vendorName': 'Mexican Imported', 'vendorAddress': {'Lat': 38.700321, 'Long': -121.365493}}, {'distance': '1.61 mi away', 'vendorName': 'MynameisPedro', 'vendorAddress': {'Lat': 38.71722, 'Long': -121.3865493}}]}
-                    navigation.navigate('SearchResults',data);
-                 } }              
+                    const { params = {} } = navigation.state;
+                    
+                    if (params.Strawberries == false && 
+                        params.Apples == false &&
+                        params.Dragonfruits == false &&
+                        params.Passionfruits == false &&
+                        params.Cranberries == false &&
+                        params.Watermelons == false &&
+                        params.Grapes == false &&
+                        params.Oranges == false &&
+                        params.Bananas == false &&
+                        params.Peaches == false &&
+                        params.Mangos == false &&
+                        params.Pineapples == false &&
+                        params.Cherries == false &&
+                        params.Blueberries == false &&
+                        params.Raspberries == false &&
+                        params.Pears == false &&
+                        params.Blackberries == false &&
+                        params.Plums == false &&
+                        params.Kiwis == false &&
+                        params.Lemons == false &&
+                        params.Tangerines == false &&
+                        params.Pomergranates == false &&
+                        params.Apricots == false &&
+                        params.Nectarines == false &&
+                        params.Avocados == false &&
+                        params.Cantaloupes == false &&
+                        params.Coconuts == false &&
+                        params.Grapefruits == false &&
+                        params.Limes == false &&
+                        params.Lychees == false &&
+                        params.Figs == false &&
+                        params.Dates == false &&
+                        params.Papayas == false ) {
+                        Alert.alert("No Fruit Selected",
+                                    "Please make a selection to locate availabe vendors")
+                    } else {
+                        navigation.getParam('query')(); 
+                    }
+
+                
+                }
+                  }              
             />
+            
         )});
     
     constructor(props) {
@@ -57,13 +99,13 @@ export default class ToggleScreen extends React.Component {
             Lychees: false,
             Figs: false,
             Dates: false,
-            Papayas: false,
-
+            Papayas: false
         }
 
         this.changeToggle = this.changeToggle.bind(this);
         this.getUserLocation = this.getUserLocation.bind(this);
         this.sendData = this.sendData.bind(this);
+        this.query = this.query.bind(this);
     }
 
     getUserLocation(callback) {
@@ -81,8 +123,9 @@ export default class ToggleScreen extends React.Component {
       }
 
     sendData() {
+        console.log("Test")
         //Make sure IP is correct
-        return fetch('http://3cf18ad1.ngrok.io/summary', {
+        return fetch('http://283b9070.ngrok.io/summary', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -108,27 +151,82 @@ export default class ToggleScreen extends React.Component {
           }); 
           
       }
+      
+    query() {
+        this.getUserLocation(this.sendData);
+    }
 
     changeToggle(fruit,value) {
         
         if (value == false) { 
             this.setState({
             [fruit]: true
-            }) }
+            }) 
+        
+            this.props.navigation.setParams({
+                [fruit]: true
+              });
+        }
         else if (value == true) {
             this.setState({
             [fruit]: false
-            }) };
+            }) 
+            
+            this.props.navigation.setParams({
+                [fruit]: false
+              });
+            ;}
       }
       
+    componentDidMount() {
+        const { navigation } = this.props
+        navigation.setParams({
+            getUserLocation: this.getUserLocation,
+            sendData: this.sendData,
+            query: this.query,
+            Strawberries: this.state.Strawberries,
+            Apples: this.state.Apples,
+            Dragonfruits: this.state.Dragonfruits,
+            Passionfruits: this.state.Passionfruits,
+            Cranberries: this.state.Cranberries,
+            Watermelons: this.state.Watermelons,
+            Grapes: this.state.Grapes,
+            Oranges: this.state.Oranges,
+            Mangos: this.state.Mangos,
+            Pineapples: this.state.Pineapples,
+            Cherries: this.state.Cherries,
+            Blueberries: this.state.Blueberries,
+            Raspberries: this.state.Raspberries,
+            Pears: this.state.Pears,
+            Blackberries: this.state.Blackberries,
+            Plums: this.state.Plums,
+            Kiwis: this.state.Kiwis,
+            Lemons: this.state.Lemons,
+            Tangerines: this.state.Tangerines,
+            Pomergranates: this.state.Pomergranates,
+            Apricots: this.state.Apricots,
+            Nectarines: this.state.Nectarines,
+            Avocados: this.state.Avocados,
+            Cantaloupes: this.state.Cantaloupes,
+            Coconuts: this.state.Coconuts,
+            Grapefruits: this.state.Grapefruits,
+            Limes: this.state.Limes,
+            Lychees: this.state.Lychees,
+            Figs: this.state.Figs,
+            Dates: this.state.Dates,
+            Papayas: this.state.Papayas
+
+        })
+
+
+    }
+
     render() {
         return (
             
             <View style={styles.container}>
 
                 <ScrollView style={styles.screencontainer}>
-
-                    
 
                     
                     <Toggle 
@@ -155,19 +253,19 @@ export default class ToggleScreen extends React.Component {
                         On = {this.state.Passionfruits}
                         changeToggle = {this.changeToggle}
                     />
-                    <Toggle 
+                     <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Cranberries'
                         On = {this.state.Cranberries}
                         changeToggle = {this.changeToggle}
                     />
-                    <Toggle 
+                     <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Watermelons'
                         On = {this.state.Watermelons}
                         changeToggle = {this.changeToggle}
                     />
-                    <Toggle 
+                     <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Grapes'
                         On = {this.state.Grapes}
@@ -185,151 +283,151 @@ export default class ToggleScreen extends React.Component {
                         On = {this.state.Bananas}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Peaches'
                         On = {this.state.Peaches}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Mangos'
                         On = {this.state.Mangos}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Pineapples'
                         On = {this.state.Pineapples}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Cherries'
                         On = {this.state.Cherries}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Blueberries'
                         On = {this.state.Blueberries}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Raspberries'
                         On = {this.state.Raspberries}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Pears'
                         On = {this.state.Pears}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Blackberries'
                         On = {this.state.Blackberries}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Plums'
                         On = {this.state.Plums}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Kiwis'
                         On = {this.state.Kiwis}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Lemons'
                         On = {this.state.Lemons}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Tangerines'
                         On = {this.state.Tangerines}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Pomergranates'
                         On = {this.state.Pomergranates}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Apricots'
                         On = {this.state.Apricots}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Nectarines'
                         On = {this.state.Nectarines}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Avocados'
                         On = {this.state.Avocados}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Cantaloupes'
                         On = {this.state.Cantaloupes}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Coconuts'
                         On = {this.state.Coconuts}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Grapefruits'
                         On = {this.state.Grapefruits}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Limes'
                         On = {this.state.Limes}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Lychees'
                         On = {this.state.Lychees}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Figs'
                         On = {this.state.Figs}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Dates'
                         On = {this.state.Dates}
                         changeToggle = {this.changeToggle}
                     />
-                     <Toggle 
+                    <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
                         fruit = 'Papayas'
                         On = {this.state.Papayas}
                         changeToggle = {this.changeToggle}
                     />
-
+                    
                     {/*How to make a new toggle:
                     STEP 1.  Copy this:
                                         <Toggle 
@@ -345,12 +443,7 @@ export default class ToggleScreen extends React.Component {
                     */}
                     {/*To be eventually deleted*/}
                     
-                    <Searchbutton 
-                            toggleComponent={ (component) => this.toggleComponent(component) }
-                            getUserLocation = {this.getUserLocation}
-                            sendData = {this.sendData}
-                            navigation={this.props.navigation}
-                    />
+                    
                     
 
                 </ScrollView>
