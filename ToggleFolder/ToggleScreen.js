@@ -59,7 +59,7 @@ export default class ToggleScreen extends React.Component {
             Kiwis: false,
             Lemons: false,
             Tangerines: false,
-            Pomergranates: false,
+            Pomegranates: false,
             Apricots: false,
             Nectarines: false,
             Avocados: false,
@@ -176,7 +176,7 @@ export default class ToggleScreen extends React.Component {
             Kiwis: this.state.Kiwis,
             Lemons: this.state.Lemons,
             Tangerines: this.state.Tangerines,
-            Pomergranates: this.state.Pomergranates,
+            Pomegranates: this.state.Pomegranates,
             Apricots: this.state.Apricots,
             Nectarines: this.state.Nectarines,
             Avocados: this.state.Avocados,
@@ -330,8 +330,8 @@ export default class ToggleScreen extends React.Component {
                     />
                     <Toggle 
                         toggleComponent={ (component) => this.toggleComponent(component) }
-                        fruit = 'Pomergranates'
-                        On = {this.state.Pomergranates}
+                        fruit = 'Pomegranates'
+                        On = {this.state.Pomegranates}
                         changeToggle = {this.changeToggle}
                     />
                     <Toggle 
