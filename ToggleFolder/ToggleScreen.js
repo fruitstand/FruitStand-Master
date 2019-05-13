@@ -16,10 +16,39 @@ export default class ToggleScreen extends React.Component {
                 onPress={ () => { 
                     const { params = {} } = navigation.state;
                     
-                    if (params.Bananas == false && 
+                    if (params.Strawberries == false && 
                         params.Apples == false &&
+                        params.Dragonfruits == false &&
+                        params.Passionfruits == false &&
+                        params.Cranberries == false &&
+                        params.Watermelons == false &&
                         params.Grapes == false &&
-                        params.Oranges == false ) {
+                        params.Oranges == false &&
+                        params.Bananas == false &&
+                        params.Peaches == false &&
+                        params.Mangos == false &&
+                        params.Pineapples == false &&
+                        params.Cherries == false &&
+                        params.Blueberries == false &&
+                        params.Raspberries == false &&
+                        params.Pears == false &&
+                        params.Blackberries == false &&
+                        params.Plums == false &&
+                        params.Kiwis == false &&
+                        params.Lemons == false &&
+                        params.Tangerines == false &&
+                        params.Pomegranates == false &&
+                        params.Apricots == false &&
+                        params.Nectarines == false &&
+                        params.Avocados == false &&
+                        params.Cantaloupes == false &&
+                        params.Coconuts == false &&
+                        params.Grapefruits == false &&
+                        params.Limes == false &&
+                        params.Lychees == false &&
+                        params.Figs == false &&
+                        params.Dates == false &&
+                        params.Papayas == false ) {
                         Alert.alert("No Fruit Selected",
                                     "Please make a selection to locate availabe vendors")
                     } else {
