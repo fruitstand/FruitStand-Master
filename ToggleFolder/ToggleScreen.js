@@ -125,7 +125,7 @@ export default class ToggleScreen extends React.Component {
     sendData() {
         console.log("Test")
         //Make sure IP is correct
-        return fetch('http://283b9070.ngrok.io/summary', {
+        return fetch('http://39a316fd.ngrok.io/summary', {
           method: 'POST',
           headers: {
             Accept: 'application/json',

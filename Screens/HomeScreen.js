@@ -1,37 +1,58 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, Text} from 'react-native';
-import { Constants, Video} from 'expo';
+import { Constants, Video, AppLoading, Asset} from 'expo';
 
 export default class App extends Component {
   static navigationOptions = {
     header: null
   }
+
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      assetsLoaded: false,
+    };
+  }
   
+  async componentDidMount() {
+    await Asset.loadAsync([
+      require('../assets/WelcomeGif.mp4'),
+      require('../assets/grape.png'),
+    ]),
+
+    this.setState({ assetsLoaded: true });
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Video
-          source={require('../assets/WelcomeGif.mp4')}
-          rate={1.0}
-          volume={1.0}
-          isMuted={false}
-          resizeMode="cover"
-          shouldPlay
-          isLooping
-          style={{ width: 300, height: 300 }}
-        />
+    if (this.state.assetsLoaded) {
+      return (
+        <View style={styles.container}>
+          <Video
+            source={require('../assets/WelcomeGif.mp4')}
+            rate={1.0}
+            volume={1.0}
+            isMuted={false}
+            resizeMode="cover"
+            shouldPlay
+            isLooping
+            style={{ width: 300, height: 300 }}
+          />
 
-        <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                this.props.navigation.navigate('Toggle');
-                } }>
-                <Text> Touch Here </Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  this.props.navigation.navigate('Toggle');
+                  } }>
+                  <Text> Touch Here </Text>
+          </TouchableOpacity>
 
 
-      </View>
-    );
+        </View>
+      ); 
+    } else {
+      return <AppLoading />;
+     } 
   }
 }
 

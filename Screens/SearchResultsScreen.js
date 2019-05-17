@@ -72,7 +72,6 @@ class FlatListItem extends Component {
             return ( 
                 <View>
                     <ScreenHeader searchCount = {this.props.miscData.searchCount}/> 
-                    <VendorCard item={this.props.item} index={this.props.index} miscData = {this.props.miscData} /> 
                 </ View >
             );
         }
@@ -94,15 +93,17 @@ export default class SearchResultsScreen extends Component {
 
     render() {
         const {params} = this.props.navigation.state
+        
+        params.vendors.unshift({rstring:"Value added to ensure flatlist loads when there are no avaliable vendors", vendorName: "null" });
         console.log(params)
-
       return (
         <View style = {styles.screen}>
+            
             <FlatList 
-                data={this.props.navigation.state.params.vendors}
+                data={params.vendors}
                 renderItem={({item, index})=> {
                     return (
-                    <FlatListItem item={item} index={index} miscData = {this.props.navigation.state.params.SearchResults}/>                    
+                        <FlatListItem item={item} index={index} miscData = {params.SearchResults}/>                   
                     );
                 }}
                 keyExtractor = {item => item.vendorName}
